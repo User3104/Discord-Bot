@@ -2,7 +2,7 @@
 
 ## About
 
-This project is intended to be a simple Discord chat bot that will be capable of carrying out the following actions:
+This project is intended to be a simple Discord chat bot made using Python that will be capable of carrying out the following actions:
 
 - Greeting new users that have joined the server
 - Make announcements that have been rewritten by the bot owner.
