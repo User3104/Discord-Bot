@@ -5,9 +5,29 @@ import datetime
 import random
 from icalendar.cal import Calendar, Component
 import datetime
+from urllib import request
+from threading import Timer
 
 # read variables from .env file using the dotenv library
 load_dotenv()
+
+
+# download the .ics file from the url in .env file
+def download_file(url, filename):
+    with request.urlopen(url) as remote_file:
+        file_content = remote_file.read().decode("utf-8")
+        with open(filename, "w", encoding="utf-8", newline="") as file:
+            file.write(file_content)
+
+
+# Update .ics calendar file every 5 min (300 seconds)
+def update_file(url, filename):
+    Timer(300, update_file, args=[url, filename]).start()
+    download_file(url, filename)
+    print("ics file updated on", datetime.datetime.now().strftime("%D:%H:%M:%S"))
+
+
+update_file(environ["CALENDAR_URL"], "calendar.ics")
 
 # set up intents
 intents = discord.Intents.default()
@@ -91,5 +111,5 @@ async def on_message(message):
         await message.channel.send(msg)
 
 
-# the dotenvpackage
+# the environ package is used to pass in the environmental variable into the discord.py method
 client.run(environ["DISCORD_TOKEN"])
