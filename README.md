@@ -21,4 +21,6 @@ The `discord.py` package will help send our API calls to discord through HTTPS, 
 
 This program will need the following packages to function as intended:
 
-`pip install -U discord.py python-dotenv icalendar`
+```
+pip install -U discord.py python-dotenv icalendar
+```
